@@ -2,7 +2,7 @@ import os
 import csv
 from abc import ABC, abstractmethod
 
-os.system("clear")  # We use this to clear the screen
+os.system("clear")  # I use this to clear the screen
 
 class Board(ABC):
     def __init__(self):
