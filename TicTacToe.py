@@ -125,7 +125,7 @@ def play_game():
     game_results = load_game_results("game_results.csv")
     board = ConcreteBoard()
 
-    while True:     #FactoryMethod#FactoryMethod#FactoryMethod#FactoryMethod#FactoryMethod
+    while True:     
         refresh_screen(board, game_results)
 
         x_factory = XPlayerFactory()
