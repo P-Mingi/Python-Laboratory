@@ -6,63 +6,52 @@ os.system("clear")  # I use this to clear the screen
 
 class Board(ABC):
     def __init__(self):
-        self.box = [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+        self._box = [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 
     def display(self):
-        print(" %s | %s | %s " % (self.box[1], self.box[2], self.box[3]))
+        print(" %s | %s | %s " % (self._box[1], self._box[2], self._box[3]))
         print("- - - - - -")
-        print(" %s | %s | %s " % (self.box[4], self.box[5], self.box[6]))
+        print(" %s | %s | %s " % (self._box[4], self._box[5], self._box[6]))
         print("- - - - - -")
-        print(" %s | %s | %s " % (self.box[7], self.box[8], self.box[9]))
+        print(" %s | %s | %s " % (self._box[7], self._box[8], self._box[9]))
 
     @abstractmethod
     def update_box(self, box_no, player):
         pass
 
     def is_winner(self, player):
-        if self.box[1] == player and self.box[2] == player and self.box[3] == player:
+        if self._box[1] == player and self._box[2] == player and self._box[3] == player:
             return True
-
-        if self.box[4] == player and self.box[5] == player and self.box[6] == player:
+        if self._box[4] == player and self._box[5] == player and self._box[6] == player:
             return True
-
-        if self.box[7] == player and self.box[8] == player and self.box[9] == player:
+        if self._box[7] == player and self._box[8] == player and self._box[9] == player:
             return True
-
-        if self.box[1] == player and self.box[4] == player and self.box[7] == player:
+        if self._box[1] == player and self._box[4] == player and self._box[7] == player:
             return True
-
-        if self.box[2] == player and self.box[5] == player and self.box[8] == player:
+        if self._box[2] == player and self._box[5] == player and self._box[8] == player:
             return True
-
-        if self.box[3] == player and self.box[6] == player and self.box[9] == player:
+        if self._box[3] == player and self._box[6] == player and self._box[9] == player:
             return True
-
-        if self.box[1] == player and self.box[5] == player and self.box[9] == player:
+        if self._box[1] == player and self._box[5] == player and self._box[9] == player:
             return True
-
-        if self.box[3] == player and self.box[5] == player and self.box[7] == player:
+        if self._box[3] == player and self._box[5] == player and self._box[7] == player:
             return True
-
         return False
 
     def is_equal(self):
         used_box = 0
-        for box in self.box:
+        for box in self._box:
             if box != " ":
                 used_box += 1
-        if used_box == 9:
-            return True
-        else:
-            return False
+        return used_box == 9
 
     def reset(self):
-        self.box = [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+        self._box = [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 
 class ConcreteBoard(Board):
     def update_box(self, box_no, player):
-        if self.box[box_no] == " ":
-            self.box[box_no] = player
+        if self._box[box_no] == " ":
+            self._box[box_no] = player
 
 class Player(ABC):
     @abstractmethod
@@ -84,17 +73,24 @@ class PlayerFactory(ABC):
 
 class XPlayerFactory(PlayerFactory):
     def create_player(self):
-        return XPlayer()
+        return PlayerMoveDecorator(XPlayer())
 
 class OPlayerFactory(PlayerFactory):
     def create_player(self):
-        return OPlayer()
+        return PlayerMoveDecorator(OPlayer())
+
+class PlayerMoveDecorator(Player):
+    def __init__(self, player):
+        self.player = player
+
+    def move(self):
+        print(f"{self.player.__class__.__name__} is making a move.")
+        return self.player.move()
 
 def save_game_results(results, filename):
     with open(filename, 'w', newline='') as csvfile:
         fieldnames = ['Player', 'Wins']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-
         writer.writeheader()
         for player, wins in results.items():
             writer.writerow({'Player': player, 'Wins': wins})
@@ -163,7 +159,6 @@ def play_game():
             print("There isn't any winner")
             save_game_results(game_results, "game_results.csv")
             break
-
 
 while True:
     play_game()
