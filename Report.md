@@ -17,23 +17,57 @@ You can play using a consol-based interface, where player can interact with game
 # 2. Body/Analysis
 #### a. The functional Requirements Coverage:
  
-**Abstraction:** The Board class is abstracting the concept of the Tic Tac Toe board, providing methods for displaying, updating, 
-and also checking the winning conditions.
+**-- Abstraction --** 
 
-**Inheritance:** The ConcreteBoard class inherits from the abstract Board class, providing a concrete implementation of the game board.
+**ConcreteBoard Class:** This class is a concrete implementation of the Board abstract base class. It implements the update_box method.
 
-**Inheritance: **The is_winner method in the Board class is an example of inheritance, as it is inherited by the ConcreteBoard class to 
-determine winning conditions.
+![Alt text](https://raw.githubusercontent.com/P-Mingi/Python-Laboratory/main/Images/abstract-1.png)
 
-**Encapsulation:** The Player classes encapsulate the logic for player moves, abstracting away the details of how moves are made.
- 
-**Encapsulation: **The is_equal method in the Board class encapsulates the logic for checking if the game has ended in a tie.
+**XPlayer Class:** This class is a concrete implementation of the Player abstract base class for the "X" player. It implements the move method.
 
-**Factory Method Pattern:** The game loop utilizes the Factory Method pattern to create instances of XPlayer and OPlayer, 
-encapsulating the creation logic and allowing for easy extension with new player types.
+![Alt text](https://raw.githubusercontent.com/P-Mingi/Python-Laboratory/main/Images/abstract-2.png)
 
-**File import/export:** The program implements functions to import and export game results using an SVG file format, 
-as specified in Requirement 3.
+**-- Polymorphism --** 
+
+In the play_game function, polymorphism is demonstrated when instances of XPlayer and OPlayer are created through their respective factory objects (XPlayerFactory and OPlayerFactory). Despite being different classes, both XPlayer and OPlayer instances can be treated uniformly as instances of the Player abstract base class.
+
+![Alt text](https://raw.githubusercontent.com/P-Mingi/Python-Laboratory/main/Images/Polymorphidm.png)
+
+**-- Inheritance --** 
+
+**OPlayer Class:** is a subclass of the Player abstract base class. It also inherits methods and properties from Player and implements the move method.
+
+![Alt text](https://raw.githubusercontent.com/P-Mingi/Python-Laboratory/main/Images/abstract-3.png)
+
+**-- Encapsulation --** 
+
+**Board class:** uses _box as a protected attribute. In Python, a single underscore "_" prefix indicates that the attribute is intended for internal use within the class and its subclasses, but not for direct access from outside these classes.
+
+![Alt text](https://raw.githubusercontent.com/P-Mingi/Python-Laboratory/main/Images/encapsulation.png)
+
+**-- Factory Method Pattern --** 
+
+The factory method pattern is implemented through the PlayerFactory abstract base class and its concrete subclasses XPlayerFactory and OPlayerFactory. This pattern allows for the creation of XPlayer and OPlayer instances without specifying the exact class of the object being created, promoting flexibility and adherence to the Open/Closed Principle.
+
+![Alt text](https://raw.githubusercontent.com/P-Mingi/Python-Laboratory/main/Images/Factory%20method.png)
+
+**-- Decorator Pattern --** 
+
+The Decorator pattern is utilized in this code to add additional behavior (printing a message) to the move method of player objects without modifying their original implementations. This pattern promotes code reusability, extensibility, and separation of concerns by allowing behavior to be added dynamically to objects at runtime.
+
+![Alt text](https://raw.githubusercontent.com/P-Mingi/Python-Laboratory/main/Images/Decorator.png)
+
+
+**-- File import/export --** 
+
+The save_game_results function writes the current game results to a CSV file. This function uses the csv.DictWriter class to write the dictionary of results to the file.
+
+![Alt text](https://raw.githubusercontent.com/P-Mingi/Python-Laboratory/main/Images/Csv-1.png)
+
+The load_game_results function reads the game results from a CSV file and returns them as a dictionary. This function uses the csv.DictReader class to read the CSV file into a dictionary.
+
+![Alt text](https://raw.githubusercontent.com/P-Mingi/Python-Laboratory/main/Images/Csv-2.png)
+
 
 # 3. Results and Summary:
 
