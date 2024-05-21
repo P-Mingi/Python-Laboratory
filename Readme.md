@@ -19,6 +19,10 @@ You can play using a consol-based interface, where player can interact with game
  
 **-- Abstraction --** 
 
+What is Abstraction ? 
+
+- Abstraction in Python involves hiding complex implementation details and showing only the necessary features of an object, typically achieved through abstract classes and interfaces, allowing users to interact with simpler, high-level interfaces.
+
 **ConcreteBoard Class:** This class is a concrete implementation of the Board abstract base class. It implements the update_box method.
 
 ![Alt text](https://raw.githubusercontent.com/P-Mingi/Python-Laboratory/main/Images/abstract-1.png)
@@ -29,17 +33,33 @@ You can play using a consol-based interface, where player can interact with game
 
 **-- Polymorphism --** 
 
+What is Polymorphism ? 
+
+- Polymorphism in Python allows objects of different classes to be treated as objects of a common superclass, enabling the same method to be used in different contexts.
+
 In the play_game function, polymorphism is demonstrated when instances of XPlayer and OPlayer are created through their respective factory objects (XPlayerFactory and OPlayerFactory). Despite being different classes, both XPlayer and OPlayer instances can be treated uniformly as instances of the Player abstract base class.
 
 ![Alt text](https://raw.githubusercontent.com/P-Mingi/Python-Laboratory/main/Images/Polymorphidm.png)
 
 **-- Inheritance --** 
 
+What is Inheritance ? 
+
+- Inheritance in Python allows a class (child) to inherit attributes and methods from another class (parent), promoting code reuse and creating a hierarchical relationship between classes.
+
 **OPlayer Class:** is a subclass of the Player abstract base class. It also inherits methods and properties from Player and implements the move method.
 
 ![Alt text](https://raw.githubusercontent.com/P-Mingi/Python-Laboratory/main/Images/abstract-3.png)
 
 **-- Encapsulation --** 
+
+What is Encapsulation ? 
+
+Encapsulation in Python restricts access to an object's data and methods using access specifiers: 
+
+- public (accessible anywhere)
+- protected (accessible within the class and subclasses, prefixed with "_")
+- and private (accessible only within the class, prefixed with "__")
 
 **Board class:** uses _box as a protected attribute. In Python, a single underscore "_" prefix indicates that the attribute is intended for internal use within the class and its subclasses, but not for direct access from outside these classes.
 
